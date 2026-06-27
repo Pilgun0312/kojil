@@ -44,7 +44,7 @@ export function JobCard({ job, isSaved, onToggleSave, onClick }: JobCardProps) {
         <Badge variant="secondary">{JOB_TYPES[job.type] || job.type}</Badge>
         <Badge variant="secondary">{JOB_MODES[job.mode] || job.mode}</Badge>
         <Badge variant="outline" className="text-emerald-700 dark:text-emerald-400">
-          {formatSalary(job.salaryMin, job.salaryMax)}
+          {formatSalary(job.salaryMin, job.salaryMax, job.currency)}
         </Badge>
       </div>
 

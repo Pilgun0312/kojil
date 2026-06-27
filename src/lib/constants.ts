@@ -49,16 +49,18 @@ export const APPLICATION_STATUS: Record<string, string> = {
   REJECTED: "Татгалзсан",
 };
 
-export function formatSalary(min?: number | null, max?: number | null): string {
+export function formatSalary(min?: number | null, max?: number | null, currency?: string | null): string {
   if (!min && !max) return "Тохиролцоно";
+  const symbol = currency === "KRW" ? "₩" : "₮";
   const fmt = (n: number) => {
     if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}сая`;
     if (n >= 1_000) return `${(n / 1_000).toFixed(0)}мян`;
     return n.toString();
   };
-  if (min && max) return `₮${fmt(min)} - ₮${fmt(max)}`;
-  if (min) return `₮${fmt(min)}-с дээш`;
-  return `₮${fmt(max!)} хүртэл`;
+  if (min && max && min === max) return `${symbol}${fmt(min)}/сар`;
+  if (min && max) return `${symbol}${fmt(min)} - ${symbol}${fmt(max)}`;
+  if (min) return `${symbol}${fmt(min)}-с дээш`;
+  return `${symbol}${fmt(max!)} хүртэл`;
 }
 
 export function timeAgo(date: Date | string): string {

@@ -49,7 +49,7 @@ export function SavedJobsSheet({ open, onClose, onSelectJob }: Props) {
                 </Button>
               </div>
               <Badge variant="outline" className="mt-2 text-emerald-700 dark:text-emerald-400 text-xs">
-                {formatSalary(s.job.salaryMin, s.job.salaryMax)}
+                {formatSalary(s.job.salaryMin, s.job.salaryMax, s.job.currency)}
               </Badge>
             </div>
           ))}

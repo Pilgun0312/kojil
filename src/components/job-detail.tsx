@@ -58,7 +58,7 @@ export function JobDetail({ jobId, onClose }: Props) {
               <Badge variant="secondary">{JOB_MODES[job.mode]}</Badge>
               {job.experience && <Badge variant="secondary">{EXPERIENCE_LEVELS[job.experience]}</Badge>}
               <Badge variant="outline" className="text-emerald-700 dark:text-emerald-400">
-                {formatSalary(job.salaryMin, job.salaryMax)}
+                {formatSalary(job.salaryMin, job.salaryMax, job.currency)}
               </Badge>
             </div>
 

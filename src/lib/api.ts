@@ -36,6 +36,7 @@ export interface Job {
   benefits: string[];
   salaryMin?: number;
   salaryMax?: number;
+  currency?: string;
   location: string;
   type: string;
   mode: string;
