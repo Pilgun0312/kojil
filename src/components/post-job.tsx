@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useCreateJob, useCreateCompany, useCompanies, useCategories } from "@/lib/api";
-import { JOB_TYPES, JOB_MODES, EXPERIENCE_LEVELS } from "@/lib/constants";
+import { JOB_TYPES, JOB_MODES, EXPERIENCE_LEVELS, KOREA_PREFECTURES } from "@/lib/constants";
 import { CheckCircle } from "lucide-react";
 import { useState } from "react";
 
@@ -27,7 +27,7 @@ export function PostJob({ open, onClose }: Props) {
   const [form, setForm] = useState({
     title: "", description: "", companyId: "", categoryId: "",
     type: "FULL_TIME", mode: "ONSITE", experience: "MID",
-    location: "Улаанбаатар", salaryMin: "", salaryMax: "",
+    location: "서울", salaryMin: "", salaryMax: "",
     requirements: "", responsibilities: "", benefits: "",
   });
 
@@ -142,7 +142,12 @@ export function PostJob({ open, onClose }: Props) {
 
             <div>
               <Label>Байршил</Label>
-              <Input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} />
+              <Select value={form.location} onValueChange={(v) => setForm({ ...form, location: v ?? "서울" })}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  {Object.entries(KOREA_PREFECTURES).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="grid grid-cols-2 gap-2">

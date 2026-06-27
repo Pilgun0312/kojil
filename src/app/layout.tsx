@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "АжилМн — Монголын ажлын зар №1 платформ",
-  description: "Ирээдүйн ажлаа олоорой. Монгол дахь бүх ажлын зар нэг дор.",
+  title: "АжилМн — Солонгос дахь Монголчуудын ажлын зар",
+  description: "Солонгост ажил хайж буй Монголчуудад зориулсан ажлын зар платформ.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

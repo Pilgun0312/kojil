@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Bookmark, BookmarkCheck, MapPin, Clock, Eye, Building2 } from "lucide-react";
 import { Job } from "@/lib/api";
-import { JOB_TYPES, JOB_MODES, formatSalary, timeAgo } from "@/lib/constants";
+import { JOB_TYPES, JOB_MODES, KOREA_PREFECTURES, formatSalary, timeAgo } from "@/lib/constants";
 
 interface JobCardProps {
   job: Job;
@@ -49,7 +49,7 @@ export function JobCard({ job, isSaved, onToggleSave, onClick }: JobCardProps) {
       </div>
 
       <div className="mt-3 flex items-center gap-3 text-xs text-muted-foreground">
-        <span className="flex items-center gap-1"><MapPin className="h-3 w-3" />{job.location}</span>
+        <span className="flex items-center gap-1"><MapPin className="h-3 w-3" />{KOREA_PREFECTURES[job.location] || job.location}</span>
         <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{timeAgo(job.createdAt)}</span>
         <span className="flex items-center gap-1"><Eye className="h-3 w-3" />{job.views}</span>
       </div>
