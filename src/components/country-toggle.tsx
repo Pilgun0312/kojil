@@ -7,15 +7,15 @@ export function CountryToggle() {
   const { country, setCountry } = useAppStore();
 
   return (
-    <div className="flex gap-0 overflow-hidden rounded-lg border-2 border-white/30">
+    <div className="inline-flex rounded-xl overflow-hidden shadow-lg">
       {(Object.entries(COUNTRIES) as [CountryCode, typeof COUNTRIES[CountryCode]][]).map(([code, info]) => (
         <button
           key={code}
           onClick={() => setCountry(code)}
-          className={`px-4 py-2 text-sm font-bold transition-all whitespace-nowrap ${
+          className={`px-6 py-3 text-base font-bold transition-all whitespace-nowrap ${
             country === code
-              ? "bg-white text-emerald-700 shadow-md"
-              : "bg-white/10 text-white hover:bg-white/20"
+              ? "bg-white text-emerald-700 shadow-inner"
+              : "bg-emerald-900/50 text-emerald-100 hover:bg-emerald-900/70"
           }`}
         >
           {info.flag} {info.label}
