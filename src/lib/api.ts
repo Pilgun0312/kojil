@@ -37,6 +37,7 @@ export interface Job {
   salaryMin?: number;
   salaryMax?: number;
   currency?: string;
+  country?: string;
   location: string;
   type: string;
   mode: string;
@@ -70,8 +71,9 @@ export interface SavedJob {
 }
 
 export function useJobs() {
-  const { searchQuery, locationQuery, filters } = useAppStore();
+  const { searchQuery, locationQuery, filters, country } = useAppStore();
   const params = new URLSearchParams();
+  params.set("country", country);
   if (searchQuery) params.set("search", searchQuery);
   if (locationQuery) params.set("location", locationQuery);
   if (filters.category) params.set("category", filters.category);
@@ -96,17 +98,20 @@ export function useJob(id: string | null) {
 }
 
 export function useCategories() {
-  return useQuery<Category[]>({ queryKey: ["categories"], queryFn: () => fetcher("/api/categories") });
+  const country = useAppStore((s) => s.country);
+  return useQuery<Category[]>({ queryKey: ["categories", country], queryFn: () => fetcher(`/api/categories?country=${country}`) });
 }
 
 export function useCompanies() {
-  return useQuery<Company[]>({ queryKey: ["companies"], queryFn: () => fetcher("/api/companies") });
+  const country = useAppStore((s) => s.country);
+  return useQuery<Company[]>({ queryKey: ["companies", country], queryFn: () => fetcher(`/api/companies?country=${country}`) });
 }
 
 export function useStats() {
+  const country = useAppStore((s) => s.country);
   return useQuery<{ jobs: number; companies: number; categories: number }>({
-    queryKey: ["stats"],
-    queryFn: () => fetcher("/api/stats"),
+    queryKey: ["stats", country],
+    queryFn: () => fetcher(`/api/stats?country=${country}`),
   });
 }
 

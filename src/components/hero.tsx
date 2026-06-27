@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useStats } from "@/lib/api";
 import { useAppStore } from "@/lib/store";
+import { CountryToggle } from "./country-toggle";
 import { useState } from "react";
 
 export function Hero() {
@@ -19,11 +20,15 @@ export function Hero() {
   };
 
   return (
-    <section className="bg-gradient-to-br from-emerald-600 to-emerald-800 py-16 text-white">
+    <section className="bg-gradient-to-br from-emerald-600 to-emerald-800 py-12 text-white">
       <div className="mx-auto max-w-4xl px-4 text-center">
+        <div className="mb-6 flex justify-center">
+          <CountryToggle />
+        </div>
+
         <h1 className="mb-3 text-3xl font-bold md:text-5xl">Ирээдүйн ажлаа олоорой</h1>
         <p className="mb-8 text-emerald-100 text-lg">
-          {stats ? `${stats.jobs} ажлын зар • ${stats.companies} компани • ${stats.categories} ангилал` : "Солонгос дахь Монголчуудын ажлын зар №1 платформ"}
+          {stats ? `${stats.jobs} ажлын зар • ${stats.companies} компани • ${stats.categories} ангилал` : "Гадаад дахь Монголчуудын ажлын зар платформ"}
         </p>
 
         <div className="flex flex-col gap-3 rounded-xl bg-white/10 p-4 backdrop-blur sm:flex-row">

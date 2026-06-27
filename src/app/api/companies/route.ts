@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const country = req.nextUrl.searchParams.get("country") || "JP";
   const companies = await prisma.company.findMany({
+    where: { country },
     include: { _count: { select: { jobs: true } } },
     orderBy: { name: "asc" },
   });

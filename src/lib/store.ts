@@ -1,7 +1,10 @@
 import { create } from "zustand";
+import type { CountryCode } from "./constants";
 
 interface AppState {
   sessionId: string;
+  country: CountryCode;
+  setCountry: (c: CountryCode) => void;
   userEmail: string;
   setUserEmail: (email: string) => void;
   searchQuery: string;
@@ -33,6 +36,8 @@ const defaultFilters = { category: "", type: "", mode: "", experience: "", salar
 
 export const useAppStore = create<AppState>((set) => ({
   sessionId: generateSessionId(),
+  country: "JP",
+  setCountry: (c) => set({ country: c, filters: { ...defaultFilters }, searchQuery: "", locationQuery: "" }),
   userEmail: "",
   setUserEmail: (email) => set({ userEmail: email }),
   searchQuery: "",

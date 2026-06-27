@@ -13,6 +13,7 @@ model Company {
   logo        String?
   industry    String?
   location    String?
+  country     String   @default("KR")
   description String?
   website     String?
   size        String?
@@ -37,6 +38,7 @@ model Job {
   salaryMin        Int?
   salaryMax        Int?
   currency         String        @default("MNT")
+  country          String        @default("KR")
   location         String
   type             String        @default("FULL_TIME")
   mode             String        @default("ONSITE")

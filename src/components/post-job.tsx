@@ -7,7 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useCreateJob, useCreateCompany, useCompanies, useCategories } from "@/lib/api";
-import { JOB_TYPES, JOB_MODES, EXPERIENCE_LEVELS, KOREA_PREFECTURES } from "@/lib/constants";
+import { JOB_TYPES, JOB_MODES, EXPERIENCE_LEVELS, getPrefectures, COUNTRIES } from "@/lib/constants";
+import { useAppStore } from "@/lib/store";
 import { CheckCircle } from "lucide-react";
 import { useState } from "react";
 
@@ -21,13 +22,16 @@ export function PostJob({ open, onClose }: Props) {
   const { data: categories } = useCategories();
   const createJob = useCreateJob();
   const createCompany = useCreateCompany();
+  const country = useAppStore((s) => s.country);
+  const prefectures = getPrefectures(country);
+  const defaultLocation = country === "JP" ? "東京" : "서울";
   const [posted, setPosted] = useState(false);
   const [newCompany, setNewCompany] = useState(false);
   const [companyForm, setCompanyForm] = useState({ name: "", industry: "", location: "" });
   const [form, setForm] = useState({
     title: "", description: "", companyId: "", categoryId: "",
     type: "FULL_TIME", mode: "ONSITE", experience: "MID",
-    location: "서울", salaryMin: "", salaryMax: "",
+    location: defaultLocation, salaryMin: "", salaryMax: "",
     requirements: "", responsibilities: "", benefits: "",
   });
 
@@ -47,6 +51,8 @@ export function PostJob({ open, onClose }: Props) {
       type: form.type,
       mode: form.mode,
       experience: form.experience,
+      country,
+      currency: COUNTRIES[country].currency,
       location: form.location,
       salaryMin: form.salaryMin ? parseInt(form.salaryMin) : undefined,
       salaryMax: form.salaryMax ? parseInt(form.salaryMax) : undefined,
@@ -142,10 +148,10 @@ export function PostJob({ open, onClose }: Props) {
 
             <div>
               <Label>Байршил</Label>
-              <Select value={form.location} onValueChange={(v) => setForm({ ...form, location: v ?? "서울" })}>
+              <Select value={form.location} onValueChange={(v) => setForm({ ...form, location: v ?? defaultLocation })}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  {Object.entries(KOREA_PREFECTURES).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
+                  {Object.entries(prefectures).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
                 </SelectContent>
               </Select>
             </div>

@@ -21,6 +21,52 @@ export const KOREA_PREFECTURES: Record<string, string> = {
   "제주도": "Жэжү до (제주도)",
 };
 
+export const COUNTRIES = {
+  JP: { label: "Япон дахь ажил", flag: "🇯🇵", currency: "JPY", symbol: "¥" },
+  KR: { label: "Солонгос дахь ажил", flag: "🇰🇷", currency: "KRW", symbol: "₩" },
+} as const;
+
+export type CountryCode = keyof typeof COUNTRIES;
+
+export const JAPAN_PREFECTURES: Record<string, string> = {
+  "東京": "Токио (東京)",
+  "大阪": "Осака (大阪)",
+  "名古屋": "Нагоя (名古屋)",
+  "横浜": "Ёкохама (横浜)",
+  "福岡": "Фүкүока (福岡)",
+  "札幌": "Саппоро (札幌)",
+  "神戸": "Кобэ (神戸)",
+  "京都": "Киото (京都)",
+  "広島": "Хирошима (広島)",
+  "仙台": "Сэндай (仙台)",
+  "千葉": "Чиба (千葉)",
+  "埼玉": "Сайтама (埼玉)",
+  "北海道": "Хоккайдо (北海道)",
+  "愛知": "Айчи (愛知)",
+  "静岡": "Шизүока (静岡)",
+  "茨城": "Ибараки (茨城)",
+  "群馬": "Гүнма (群馬)",
+  "栃木": "Точиги (栃木)",
+  "長野": "Нагано (長野)",
+  "新潟": "Ниигата (新潟)",
+  "三重": "Миэ (三重)",
+  "岐阜": "Гифү (岐阜)",
+  "富山": "Тояма (富山)",
+  "石川": "Ишикава (石川)",
+  "熊本": "Күмамото (熊本)",
+  "鹿児島": "Кагошима (鹿児島)",
+  "沖縄": "Окинава (沖縄)",
+};
+
+export function getPrefectures(country: string) {
+  return country === "JP" ? JAPAN_PREFECTURES : KOREA_PREFECTURES;
+}
+
+export function getPrefectureLabel(location: string, country: string): string {
+  const prefs = getPrefectures(country);
+  return prefs[location] || location;
+}
+
 export const JOB_TYPES: Record<string, string> = {
   FULL_TIME: "Бүтэн цагийн",
   PART_TIME: "Цагийн",
@@ -51,7 +97,7 @@ export const APPLICATION_STATUS: Record<string, string> = {
 
 export function formatSalary(min?: number | null, max?: number | null, currency?: string | null): string {
   if (!min && !max) return "Тохиролцоно";
-  const symbol = currency === "KRW" ? "₩" : "₮";
+  const symbol = currency === "KRW" ? "₩" : currency === "JPY" ? "¥" : "₮";
   const fmt = (n: number) => {
     if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}сая`;
     if (n >= 1_000) return `${(n / 1_000).toFixed(0)}мян`;

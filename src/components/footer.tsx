@@ -8,7 +8,7 @@ export function Footer() {
           <Briefcase className="h-5 w-5 text-emerald-600" />
           <span className="font-bold">АжилМн</span>
         </div>
-        <p className="text-sm text-muted-foreground">Солонгос дахь Монголчуудын ажлын зар платформ</p>
+        <p className="text-sm text-muted-foreground">Гадаад дахь Монголчуудын ажлын зар платформ</p>
         <p className="mt-2 text-xs text-muted-foreground">&copy; 2026 АжилМн. Бүх эрх хуулиар хамгаалагдсан.</p>
       </div>
     </footer>

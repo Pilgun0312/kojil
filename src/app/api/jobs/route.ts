@@ -12,7 +12,9 @@ export async function GET(req: NextRequest) {
   const salaryMin = searchParams.get("salaryMin");
   const salaryMax = searchParams.get("salaryMax");
 
-  const where: Record<string, unknown> = {};
+  const country = searchParams.get("country") || "JP";
+
+  const where: Record<string, unknown> = { country };
   if (search) {
     where.OR = [
       { title: { contains: search, mode: "insensitive" } },

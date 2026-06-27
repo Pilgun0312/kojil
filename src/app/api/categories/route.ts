@@ -1,9 +1,11 @@
 import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const country = req.nextUrl.searchParams.get("country") || "JP";
   const categories = await prisma.category.findMany({
-    include: { _count: { select: { jobs: true } } },
+    where: { jobs: { some: { country } } },
+    include: { _count: { select: { jobs: { where: { country } } } } },
     orderBy: { name: "asc" },
   });
   return NextResponse.json(categories);

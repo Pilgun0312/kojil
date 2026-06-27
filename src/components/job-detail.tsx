@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useJob, useApplyMutation } from "@/lib/api";
 import { useAppStore } from "@/lib/store";
-import { JOB_TYPES, JOB_MODES, EXPERIENCE_LEVELS, KOREA_PREFECTURES, formatSalary, APPLICATION_STATUS } from "@/lib/constants";
+import { JOB_TYPES, JOB_MODES, EXPERIENCE_LEVELS, getPrefectureLabel, formatSalary, APPLICATION_STATUS } from "@/lib/constants";
 import { MapPin, Building2, Eye, Users, CheckCircle } from "lucide-react";
 import { useState } from "react";
 
@@ -49,7 +49,7 @@ export function JobDetail({ jobId, onClose }: Props) {
             <DialogHeader>
               <DialogTitle>{job.title}</DialogTitle>
               <DialogDescription className="flex items-center gap-2 pt-1">
-                <Building2 className="h-4 w-4" /> {job.company.name} • <MapPin className="h-4 w-4" /> {KOREA_PREFECTURES[job.location] || job.location}
+                <Building2 className="h-4 w-4" /> {job.company.name} • <MapPin className="h-4 w-4" /> {getPrefectureLabel(job.location, job.country || "KR")}
               </DialogDescription>
             </DialogHeader>
 
