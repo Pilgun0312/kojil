@@ -43,6 +43,9 @@ model Job {
   type             String        @default("FULL_TIME")
   mode             String        @default("ONSITE")
   experience       String?
+  contactName      String?
+  contactPhone     String?
+  contactEmail     String?
   views            Int           @default(0)
   company          Company       @relation(fields: [companyId], references: [id])
   companyId        String

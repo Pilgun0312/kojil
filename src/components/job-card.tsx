@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Bookmark, BookmarkCheck, MapPin, Clock, Eye, Building2 } from "lucide-react";
+import { Bookmark, BookmarkCheck, MapPin, Clock, Eye, Building2, Phone } from "lucide-react";
 import { Job } from "@/lib/api";
 import { JOB_TYPES, JOB_MODES, getPrefectureLabel, formatSalary, timeAgo } from "@/lib/constants";
 
@@ -52,6 +52,7 @@ export function JobCard({ job, isSaved, onToggleSave, onClick }: JobCardProps) {
         <span className="flex items-center gap-1"><MapPin className="h-3 w-3" />{getPrefectureLabel(job.location, job.country || "KR")}</span>
         <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{timeAgo(job.createdAt)}</span>
         <span className="flex items-center gap-1"><Eye className="h-3 w-3" />{job.views}</span>
+        {job.contactPhone && <span className="flex items-center gap-1 text-emerald-600"><Phone className="h-3 w-3" />Холбоо барих</span>}
       </div>
     </div>
   );

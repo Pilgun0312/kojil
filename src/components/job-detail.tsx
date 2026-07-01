@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { useJob, useApplyMutation } from "@/lib/api";
 import { useAppStore } from "@/lib/store";
 import { JOB_TYPES, JOB_MODES, EXPERIENCE_LEVELS, getPrefectureLabel, formatSalary, APPLICATION_STATUS } from "@/lib/constants";
-import { MapPin, Building2, Eye, Users, CheckCircle } from "lucide-react";
+import { MapPin, Building2, Eye, Users, CheckCircle, Phone, Mail, User } from "lucide-react";
 import { useState } from "react";
 
 interface Props {
@@ -100,6 +100,30 @@ export function JobDetail({ jobId, onClose }: Props) {
                     <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
                       {job.benefits.map((b, i) => <li key={i}>{b}</li>)}
                     </ul>
+                  </div>
+                )}
+                {(job.contactName || job.contactPhone || job.contactEmail) && (
+                  <div className="rounded-lg border border-emerald-200 bg-emerald-50 dark:bg-emerald-950 dark:border-emerald-800 p-4">
+                    <h4 className="font-semibold mb-2 text-emerald-700 dark:text-emerald-400">Холбоо барих (担当者)</h4>
+                    <div className="space-y-1.5 text-sm">
+                      {job.contactName && (
+                        <p className="flex items-center gap-2 text-muted-foreground">
+                          <User className="h-4 w-4 text-emerald-600" /> {job.contactName}
+                        </p>
+                      )}
+                      {job.contactPhone && (
+                        <p className="flex items-center gap-2">
+                          <Phone className="h-4 w-4 text-emerald-600" />
+                          <a href={`tel:${job.contactPhone}`} className="text-emerald-700 dark:text-emerald-400 hover:underline font-medium">{job.contactPhone}</a>
+                        </p>
+                      )}
+                      {job.contactEmail && (
+                        <p className="flex items-center gap-2">
+                          <Mail className="h-4 w-4 text-emerald-600" />
+                          <a href={`mailto:${job.contactEmail}`} className="text-emerald-700 dark:text-emerald-400 hover:underline font-medium">{job.contactEmail}</a>
+                        </p>
+                      )}
+                    </div>
                   </div>
                 )}
                 {job.company.description && (

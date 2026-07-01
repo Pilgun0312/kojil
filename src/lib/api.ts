@@ -42,6 +42,9 @@ export interface Job {
   type: string;
   mode: string;
   experience?: string;
+  contactName?: string;
+  contactPhone?: string;
+  contactEmail?: string;
   views: number;
   company: Company;
   category: Category;
